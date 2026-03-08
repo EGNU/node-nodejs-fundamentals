@@ -1,9 +1,15 @@
 const dynamic = async () => {
-  // Write your code here
-  // Accept plugin name as CLI argument
-  // Dynamically import plugin from plugins/ directory
-  // Call run() function and print result
-  // Handle missing plugin case
+	try {
+		const pluginName = process.argv[2];
+		const plugin = await import(`./plugins/${pluginName}.js`);
+		if (!plugin.run || typeof plugin.run !== 'function') {
+			throw new Error();
+		}
+		console.log(plugin.run());
+	} catch {
+		console.error('Plugin not found');
+		process.exit(1);
+	}
 };
 
 await dynamic();
