@@ -18,7 +18,7 @@ const restore = async () => {
 	const snapshotData = JSON.parse(snapshot);
 	const entries = snapshotData.entries;
 
-	const workspaceRestoredPath = path.resolve(workspaceRestoredName);
+	const workspaceRestoredPath = path.join(workspaceRestoredName);
 	await fs.mkdir(workspaceRestoredPath, { recursive: false });
 
 	for (const entry of entries) {
